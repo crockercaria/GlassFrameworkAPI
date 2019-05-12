@@ -1,0 +1,4470 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "GlassFramework Products Portal",
+    "version" : "1.1-oas3"
+  },
+  "servers" : [ {
+    "url" : "https://glass.epos.ubi.pt:8080/GlassFramework/webresources"
+  } ],
+  "paths" : {
+    "/files/{object_type}/{object_instance}/{output_format}" : {
+      "get" : {
+        "description" : "<b>GET FILES V2</b> - Returns the files(s) that match the criteria.\n\n<p>\n<b>object_type - </b> the type of the criteria\n<ul>\n    <li>agency</li>\n    <li>antenna</li>\n    <li>city</li>\n    <li>combination</li>\n    <li>coordinates<b>º</b></li>\n    <li>coordinates_data</li>\n    <li>coordinates_data_list</li>\n    <li>country</li>\n    <li>date_range<b>ºº</b></li>\n    <li>format</li>\n    <li>length</li>\n    <li>marker</li>\n    <li>name</li>\n    <li>network</li>\n    <li>published_date<b>ºº</b></li>\n    <li>radome</li>\n    <li>receiver</li>\n    <li>sampling_frequency</li>\n    <li>state</li>\n    <li>station_date<b>ºº</b></li>\n    <li>type</li>\n</ul>\n\n<b>º</b> - this object uses \"minLat=X&maxLat=X&minLon=X&maxLon=X\" as it's object instance.\n<b>ºº</b> - this objects use \"date_from=X&date_to=X\" as it's object instance.\n</p>\n\n<p>\n<b>object_instance - </b> the value of the criteria <i>(e.g. for country criteria may be France)</i>\n</p>\n\n\n<p>\n<b>output_format - </b> the format of the output\n<ul>\n    <li>csv</li>\n    <li>json</li>\n    <li>script<b>ª</b></li>\n    <li>xml</li>\n</ul>\n\n<b>ª</b> - this format is not valid for all object_type\n</p>",
+        "parameters" : [ {
+          "name" : "object_instance",
+          "in" : "path",
+          "description" : "SOPH, Portugal, EUREF, ..",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "object_type",
+          "in" : "path",
+          "description" : "marker, country, network, ..",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "output_format",
+          "in" : "path",
+          "description" : "xml, json, csv or script",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              },
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              },
+              "text/plain" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/log/geodesyml/{marker}" : {
+      "get" : {
+        "description" : "<b>GET GeodesyML file by marker</b> - Returns the GeodesyML file for a station.",
+        "parameters" : [ {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "Marker of the station e.g. SOPH",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content",
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/log/{marker}" : {
+      "get" : {
+        "description" : "<b>GET log file by marker</b> - Returns the latest log file for a station.",
+        "parameters" : [ {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "Marker of the station e.g. SOPH",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content",
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/attributes/{attribute}" : {
+      "get" : {
+        "description" : "<p><b>GET DIFFERENT DB DATA BASED ON ATTRIBUTE</b></p>\r\n\nGets attributes for application in other requests\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>attribute</b> - string with one of the possible attributes described below.\r\n</ul>\r\n\n<p>Possible attributes:</p>\r\n<ul>\r\n    <li><b>network</b> - Gets all networks</li>\r\n    <li><b>analysis_center</b> - Gets all available analysis centers</li>\r\n    <li><b>reference_frame</b> - Gets all available reference frames</li>\r\n    <li><b>otl_model</b> - Gets all available OTL models</li>\r\n    <li><b>calibration_model</b> - Gets all available calibration models</li>\r\n    <li><b>sampling_period</b> - Gets all available sampling periods</li>\r\n    <li><b>format</b> - Gets all available output formats</li>\r\n</ul>\r\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n</ul>\r\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/attributes/analysis_center",
+        "parameters" : [ {
+          "name" : "attribute",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/products/coordinates/file/{marker}/{analysis_center}/{sampling_period}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET COORDINATES FILES</b></p>\r\n\nGet <i>coordinate</i> files (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be  <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/coordinates/file/BLIX/UGA/daily/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/coordinates/{marker}/{analysis_center}/{sampling_period}/{coordinates_system}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET COORDINATES </b></p>\r\n\nGet <i>coordinate</i> objects (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b>, <b>coordinates system</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>coordinates_system</b> - name of the desired coordinates system (either xyz or enu)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/coordinates/BLIX/UGA/daily/xyz/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "coordinates_system",
+          "in" : "path",
+          "description" : "name of the desired coordinates system (either xyz or enu)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/products/data-availability" : {
+      "get" : {
+        "description" : "<p><b>GET DATA AVAILABILITY MULTIPLE</b></p>\r\n\nGets time intervals where stations with products have data.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/data-availability-individual/{marker}" : {
+      "get" : {
+        "description" : "<p><b>GET DATA AVAILABILITY INDIVIDUAL</b></p>\r\n\nGets individual time intervals where a station with products have data.\r\n\nIf the station has weekly data, then it returns the first day as 6 days before once it has data from all the week.\r\nThis is usefull to fill the availability chart on products portal",
+        "parameters" : [ {
+          "name" : "marker",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/power-spectral-density/{analysis_center}/{marker}" : {
+      "get" : {
+        "description" : "<p><b>RETRIEVES POWER SPECTRAL DENSITY PLOTS</b></p>\r\n\nGet power spectral density plots\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>analysis_center</b> - name of the desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>marker</b> - the site which you want to download data from (please refer to <i>products/stations</i> request for possible site names)</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/power-spectral-density/BLIX/WUT",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "the analysis center that produced the data for the creation of the power spectral density plots (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "the site which you want to download data from (please refer to <i>products/stations</i> request for possible site names)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "image/png" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/products/stations/{min_lat}/{max_lat}/{min_lon}/{max_lon}" : {
+      "get" : {
+        "description" : "<p><b>GET STATIONS WITH PRODUCTS INSIDE BOUNDING BOX</b></p>\r\n\n Get stations inside provided bounding box.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>min_lat</b> - minimum latitude in decimal degree format (<i>-8.1234</i>)</li>\r\n    <li><b>max_lat</b> - maximum latitude in decimal degree format (<i>-8.1234</i>)</li>\r\n    <li><b>min_lon</b> - minimum longitude in decimal degree format (<i>-8.1234</i>)</li>\r\n    <li><b>max_lon</b> - maximum longitude in decimal degree format (<i>-8.1234</i>)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/stations/-3.52123/5.5123/-24.123123/5.41231",
+        "parameters" : [ {
+          "name" : "max_lat",
+          "in" : "path",
+          "description" : "maximum latitude in decimal format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "max_lon",
+          "in" : "path",
+          "description" : "maximum longitude in decimal format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "min_lat",
+          "in" : "path",
+          "description" : "minimum latitude in decimal format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "min_lon",
+          "in" : "path",
+          "description" : "minimum longitude in decimal format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/products/stations{optional_parameters}" : {
+      "get" : {
+        "description" : "<p><b>GET STATIONS WITHS PRODUCTS </b></p>\r\n\nGet <i>station</i> objects which have available products.\r\n\n<br />\r\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>analysis_center</b> - name of the desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>otl_model</b> - name of the desired otl model (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>reference_frame</b> - name of desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>cut_of_angle</b> - desired value of cut of angle</li>\r\n    <li><b>epoch_start</b> - stations with products that begin in specified epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> - stations with products that end in specified epoch (date format YYYY-MM-DD) </li>\r\n    <li><b>coordinates</b> - type of bounding box:\r\n         <ul>\r\n             <li>rectangle:min_lat,max_lat,min_lon,max_lon (all coordinates must be provided in decimal degree format (<i>-8.1234</i>))</li>\r\n             <li>circle:lat,lon,radius (coordinates must be provided in decimal degree format (<i>-8.1234</i>) and radius in meters)</li>\r\n             <li>polygon:[coordinates_list] (all coordinates must be provided in decimal degree format (<i>-8.1234</i>))</li>\r\n         </ul>\r\n    </li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>Please note that you can only use each optional parameter once.</li>\r\n <li>The reference frame will be <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Examples</b></p>\r\nlocalhost:8080/GlassFramework/webresources/products/stations/analysis_centre=BFKH&epoch_start=2017-02-23\r\nlocalhost:8080/GlassFramework/webresources/products/stations/coordinates_rectangle=35.99255408802867,44.5677027377636,-11.429776400327684,-6.515891700983048&epoch_start=2015-01-01",
+        "parameters" : [ {
+          "name" : "optional_parameters",
+          "in" : "path",
+          "description" : "Parameter1:value1,value2&Parameter2:value3,value4&…",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      }
+    },
+    "/products/timeseries-residuals/file/{marker}/{analysis_center}/{sampling_period}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET TIMESERIES RESIDUALS FILE</b></p>\r\n\nGet <i>timeseries <b>residuals</b> file</i> objects (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be  <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/timeseries-residuals/file/BLIX/UGA/daily/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/timeseries-residuals/{marker}/{analysis_center}/{sampling_period}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET TIMESERIES RESIDUALS</b></p>\r\n\nGet <i>timeseries <b>residuals</b></i> objects (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b>, <b>coordinates system</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>coordinates_system</b> - name of the desired coordinates system (<b>ONLY enu</b>)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be  <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/timeseries-residuals/BLIX/UGA/daily/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/timeseries/create-download-file" : {
+      "post" : {
+        "description" : "<p><b>CREATE CUSTOMIZED DOWNLOAD REQUEST FILE</b></p>\r\n\nCreates a customized download request based on data specified on Products Gateway\r\n\n<br />\r\n<p>POST parameter:</p>\r\n<ul>\r\n    <li><b>data</b> - JSON string with the parameters needed to process the customized download request.</li>\r\n</ul>",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "202" : {
+            "description" : "Accepted"
+          }
+        }
+      }
+    },
+    "/products/timeseries/download-file/{filename}" : {
+      "get" : {
+        "description" : "<p><b>DOWNLOAD CUSTOMIZED DOWNLOAD REQUEST FILE</b></p>\r\n\nDownloads customized download request based on request previously made on Products Gateway\r\n\n<br />\r\n<p>Parameter:</p>\r\n<ul>\r\n    <li><b>filename</b> - name of the file with the customized timeseries to be downloaded. (this filename was sent by email to the person who asked for a customized download)</li>\r\n</ul>",
+        "parameters" : [ {
+          "name" : "filename",
+          "in" : "path",
+          "description" : "name of the file with the customized timeseries to be downloaded",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Type" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/timeseries/file/{marker}/{analysis_center}/{sampling_period}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET TIMESERIES FILE</b></p>\r\n\nGet <i>timeseries</i> files (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis(please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be  <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/timeseries/file/BLIX/UGA/daily/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/timeseries/{marker}/{analysis_center}/{sampling_period}/{coordinates_system}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET TIMESERIES</b></p>\r\n\nGet <i>timeseries</i> objects (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>sampling period</b>, <b>coordinates system</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>sampling_period</b> - name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)</li>\r\n    <li><b>coordinates_system</b> - name of the desired coordinates system (either xyz or enu)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p>Optional parameters are:</p>\r\n<ul>\r\n    <li><b>reference_frame</b> - name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)</li>\r\n    <li><b>otl_model</b> - name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)</li>\r\n    <li><b>calibration_model</b> - name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)</li>\r\n    <li><b>cut_of_angle</b> - value of the desired cut of angle</li>\r\n    <li><b>remove_outliers</b> - remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)</li>\r\n    <li><b>apply_offsets</b> - apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)</li>\r\n    <li><b>epoch_start</b> - beginning of epoch (date format YYYY-MM-DD)</li>\r\n    <li><b>epoch_end</b> -  end of epoch (date format YYYY-MM-DD)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n <li>The reference frame will be  <i>IGS08</i>, <i>IGS14</i>, <i>free-network</i>, <i>IGb08</i> or <i>INGV_EU</i>.</li>\r\n <li>The OTL model used in GNSS analysis will be, for example,  <i>FES2004</i>, <i>FES2014b</i> or <i>GOT4.10c</i></li>\r\n <li>The antenna calibration model used in GNSS analysis will be, for example, <i>epn_14_1958.atx</i> or <i>Gigs08_wwww.atx</i></li>\r\n <li>If no start and/or end epoch date are given, the whole time series will be returned.</li>\r\n <li>OTL model and calibration model are two parameters which refine the search.</li>\r\n <li>Sampling period tells us if daily or weekly solutions should be obtained.</li>\r\n <li>Cut of angle also restricts the search to solutions with cut-off angle larger than the one given.</li>\r\n <li>Remove outliers is a boolean parameter which indicates if coordinates that are considered outliers should be included or discarded.</li>\r\n <li>if apply offsets is true, then apply the estimated offsets value.</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/timeseries/BLIX/UGA/daily/json?epoch_start=2015-02-23&remove_outliers=false",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "coordinates_system",
+          "in" : "path",
+          "description" : "name of the desired coordinates system (either xyz or enu)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "sampling_period",
+          "in" : "path",
+          "description" : "name of the resolution of solutions (please refer to <i>products/attributes/sampling_period</i> request for possible sampling periods)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "apply_offsets",
+          "in" : "query",
+          "description" : "apply estimated offsets to time series or not (1 or true to apply, 0 or false to not apply. If no value is given, offsets are not applied by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "calibration_model",
+          "in" : "query",
+          "description" : "name of the desired antenna calibration model used in GNSS analysis (please refer to <i>products/attributes/calibration_model</i> request for possible calibration models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "cut_of_angle",
+          "in" : "query",
+          "description" : "value of the desired cut of angle",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_end",
+          "in" : "query",
+          "description" : "end of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "epoch_start",
+          "in" : "query",
+          "description" : "beginning of epoch (date format YYYY-MM-DD)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "otl_model",
+          "in" : "query",
+          "description" : "name of the desired OTL model used in GNSS analysis (please refer to <i>products/attributes/otl_model</i> request for possible OTL models)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "reference_frame",
+          "in" : "query",
+          "description" : "name of the desired reference frame (please refer to <i>products/attributes/reference_frame</i> request for possible reference frames)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "remove_outliers",
+          "in" : "query",
+          "description" : "remove outliers from time series or not (1 or true to remove, 0 or false to include. If no value is given, outliers are removed by default)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/velocities/file/{marker}/{analysis_center}/{coordinates_system}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET VELOCITIES FILES</b></p>\r\n\nGet <i>velocity</i> files (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>coordinates system</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>coordinates_system</b> - name of the desired coordinates system (either xyz or enu)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/velocities/file/BLIX/UGA/xyz/json",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "coordinates_system",
+          "in" : "path",
+          "description" : "name of the desired coordinates system (either xyz or enu)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "headers" : {
+              "Content-Disposition" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/octet-stream" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/velocities/{marker}/{analysis_center}/{coordinates_system}/{format}" : {
+      "get" : {
+        "description" : "<p><b>GET VELOCITIES</b></p>\r\n\nGet <i>velocity</i> objects (which is a time series) for a given <b>station</b>, <b>analysis center</b>, <b>coordinates system</b> and <b>format</b>.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n    <li><b>marker</b> - four letter station identification</li>\r\n    <li><b>analysis_center</b> - name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)</li>\r\n    <li><b>coordinates_system</b> - name of the desired coordinates system (either xyz or enu)</li>\r\n    <li><b>format</b> - name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)</li>\r\n</ul>\r\n\n\n<p><b>Notes</b></p>\r\n<ul>\r\n <li>Parameters are case sensitive</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/velocities/BLIX/UGA/xyz/json",
+        "parameters" : [ {
+          "name" : "analysis_center",
+          "in" : "path",
+          "description" : "name of desired analysis center (please refer to <i>products/attributes/analysis_center</i> request for possible analysis centers)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "coordinates_system",
+          "in" : "path",
+          "description" : "name of the desired coordinates system (either xyz or enu)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "name of the output format (please refer to <i>products/attributes/format</i> request for possible output formats)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter station identification",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/velocityfield/{marker}" : {
+      "get" : {
+        "description" : "<p><b>GET VELOCITY FIELD OF STATION(S)</b></p>\r\n\n Get the velocity field for a given station or all stations.\r\n\n<br />\r\n<p>Parameters:</p>\r\n<ul>\r\n <li><b>marker</b> - four letter single station identification or <i>all</i> keyword for all stations</li>\r\n</ul>\r\n\n\n<br />\r\n<p><b>Example</b></p>\r\nhttp://localhost:8080/GlassFramework/webresources/products/velocityfield/all",
+        "parameters" : [ {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "four letter single station identification or <i>all</i> keyword for all stations",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stations/stations-json-dictionary/{id_station}" : {
+      "get" : {
+        "description" : "UPDATE STATIONS DICTIONARY\r\n\nSend station ID to update cache for a single station of \"all\" for all stations.",
+        "parameters" : [ {
+          "name" : "id_station",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "text/plain;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/agency/{agency}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY AGENCY V2</b> - Returns the station(s) that belong to the specified agency(ies).\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for agency should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "agency",
+          "in" : "path",
+          "description" : "agency(ies) to which the stations belong e.g. OCA-Geoazur",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/antenna/{antenna}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY ANTENNA V2</b> - Returns the station(s) that have the specified antenna.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for antenna should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "antenna",
+          "in" : "path",
+          "description" : "antenna(s) name(s) e.g. LEIAT302-GP",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/city/{city}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY CITY V2</b> - Returns the station(s) from the specified city(ies).\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for city should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "city",
+          "in" : "path",
+          "description" : "city(ies) name(s) e.g. Cascais",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/combination/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION COMBINATION V2</b> - Returns the station(s) that match the parameters.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n     <li>full</li>\n     <li>short</li>\n</ul>\n<p>\n\n<p>\n Please specify the output format as one of the options below:\n <ul>\n     <li>csv</li>\n     <li>json</li>\n     <li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    The parameters accepted are:\n    <ul>\n        <li>agency (multiple);</li>\n        <li>antenna (multiple);</li>\n        <li>city (multiple);</li>\n        <li>coordinates:\n            <ul>\n                <li><b>circle</b>, with the following parameters:</li>\n                <ul>\n                <li>centerLat;</li>\n                <li>centerLon;</li>\n                <li>radius;</li>\n                </ul>\n            </ul>\n            <ul>\n                <li><b>polygon</b>, with the following parameters:</li>\n                <ul>\n                     <li>latitude,longitude;latitude,longitude;..</li>\n                </ul>\n            </ul>\n            <ul>\n                <li><b>rectangle</b>, with the following parameters:</li>\n                <ul>\n                <li>maxLat;</li>\n                <li>maxLon;</li>\n                <li>minLat;</li>\n                <li>minLon;</li>\n                </ul>\n            </ul>\n         </li>\n        <li>country (multiple);</li>\n        <li>date_from;</li>\n        <li>date_to;</li>\n        <li>geojson; (http://geojson.io)</li>\n        <li>installedDateMax;</li>\n        <li>installedDateMin;</li>\n        <li>invertedNetworks (multiple);</li>\n        <li>lifetime;</li>\n        <li>marker (multiple);</li>\n        <li>maxAlt;</li>\n        <li>maxLon;</li>\n        <li>maxLat;</li>\n        <li>minAlt;</li>\n        <li>minLat;</li>\n        <li>minLon;</li>\n        <li>network (multiple);</li>\n        <li>satellite (multiple);</li>\n        <li>site (multiple);</li>\n        <li>state (multiple);</li>\n        <li>radome (multiple);</li>\n        <li>receiver (multiple);</li>\n        <li>removedDateMax;</li>\n        <li>removedDateMin;</li>\n        <li><b>T2 parameters:</b></li>\n             <ul>\n                 <li>dataAvailability;</li>\n                 <li>dateRange;</li>\n                 <li>fileType;</li>\n                 <li>minimumObservationDays;</li>\n                 <li>minimumObservationYears;</li>\n                 <li>samplingWindow;</li>\n                 <li>samplingFrequency;</li>\n             </ul>\n    </ul>\n</p>\n\n<p>\n    The parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n\n<p>\n    Multiple values for a specified parameter should be separated by <b>,</b> (COMMA)\n</p>\n\n<p>\n     <b>Note: the results are an <u>INTERSECTION</u> of the parameters, but each parameter may contain multiple values.</b>\n</p>\n<p>\nSo if the value of the country parameter is 'France,Italy' and the coordinate parameter is a rectangle large enough to contain stations from France, Italy and Switzerland, only stations from France and Italy will show up.\n</p>\n<p></p>\n<p>An example of a query could be: </p>\n<p>http://localhost:8080/GlassFramework/webresources/stations/v2/combination/short/csv?country=France,Italy&ampnetwork=RENAG&coordinates=circle&ampcenterlat=44.2&ampcenterlon=7.1&ampradius=100</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format, e.g. <b>csv</b>",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "output size, e.g. <b>short</b>",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "agency",
+          "in" : "query",
+          "description" : "station's agency e.g. <b>IGN France</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "altitude",
+          "in" : "query",
+          "description" : "Altitude range e.g. <b>400,900</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "antenna",
+          "in" : "query",
+          "description" : "station's antenna e.g. <b>LEIAT302-GP</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "centerLat",
+          "in" : "query",
+          "description" : "for coord. circle only e.g. <b>43.2</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "centerLon",
+          "in" : "query",
+          "description" : "for coord. circle only e.g. <b>10.0</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "city",
+          "in" : "query",
+          "description" : "station's city e.g. <b>Cascais</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "constellation",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "coordinates",
+          "in" : "query",
+          "description" : "format of the perimeter, e.g. <b>circle</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "country",
+          "in" : "query",
+          "description" : "station's country e.g. <b>Portugal</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "dataAvailability",
+          "in" : "query",
+          "description" : "T2 minimum percentage of data available (e.g. <b>75</b>) between the number of days the station was installed and the days that have files",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "dateRange",
+          "in" : "query",
+          "description" : "T2 date range to use relatively to files e.g. <b>20150115,2017-10-24</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_from",
+          "in" : "query",
+          "description" : "starting date, stations that were active after this date, e.g. <b>19990125</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "description" : "ending date, station was active previously to this date, e.g. <b>20171027</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "elevangle",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "fileType",
+          "in" : "query",
+          "description" : "T2 type of the files e.g. <b>RINEX2</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "frequency",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "geojson",
+          "in" : "query",
+          "description" : "a GeoJSON as bounding box (e.g. http://geojson.io)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "installedDateMax",
+          "in" : "query",
+          "description" : "maximum date for the installation of a station e.g. <b>2007-06-24</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "installedDateMin",
+          "in" : "query",
+          "description" : "minimum date for the installation of a station e.g. <b>20070113</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "invertedNetworks",
+          "in" : "query",
+          "description" : "networks to which the station doesn't belong e.g.  <b>RENAG,EUREF</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "latitude",
+          "in" : "query",
+          "description" : "Latitude range e.g. <b>30,40</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lifetime",
+          "in" : "query",
+          "description" : "Minimum amount of days a station was installed e.g. <b>650</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "longitude",
+          "in" : "query",
+          "description" : "Longitude range e.g. <b>-15,20</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "query",
+          "description" : "station's marker, e.g. <b>LAGO</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "maxAlt",
+          "in" : "query",
+          "description" : "station's maximum altitude e.g.  <b>580</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxLat",
+          "in" : "query",
+          "description" : "for coord. rectangle only e.g. <b>46.2</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxLon",
+          "in" : "query",
+          "description" : "for coord. rectangle only e.g. <b>15.5</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minAlt",
+          "in" : "query",
+          "description" : "station's minimum altitude e.g.  <b>80.5</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minLat",
+          "in" : "query",
+          "description" : "for coord. rectangle only e.g. <b>5</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minLon",
+          "in" : "query",
+          "description" : "for coord. rectangle only e.g. <b>41</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minimumObservationDays",
+          "in" : "query",
+          "description" : "Minimum amount of days with files e.g. <b>400</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "minimumObservationYears",
+          "in" : "query",
+          "description" : "Minimum amount of years with files e.g. <b>5</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "multipathvalue",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "nbclockjumps",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "nbcycleslips",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "network",
+          "in" : "query",
+          "description" : "station's network e.g. <b>EUREF</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "observationtype",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "polygon",
+          "in" : "query",
+          "description" : "for polygon only e.g. <b>42.0,7.0;32.1,7.4;37,4.6</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "radius",
+          "in" : "query",
+          "description" : "for coord. circle only e.g. <b>50</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "radome",
+          "in" : "query",
+          "description" : "station's radome e.g. <b>OLGA</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "ratioepoch",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "receiver",
+          "in" : "query",
+          "description" : "station's receiver e.g. <b>ASHTECH GG24C</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "removedDateMax",
+          "in" : "query",
+          "description" : "maximum date for the removal of a station e.g. <b>20170214</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "removedDateMin",
+          "in" : "query",
+          "description" : "minimum date for the removal of a station e.g. <b>2017-01-17</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "samplingFrequency",
+          "in" : "query",
+          "description" : "T2 sampling frequency e.g. <b>30s</b> or <b>1s</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "samplingWindow",
+          "in" : "query",
+          "description" : "T2 sampling window e.g. <b>24h</b> or <b>1h</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "satelliteSystem",
+          "in" : "query",
+          "description" : "satellites supported by the station e.g. <b>GPS,GLO</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "site",
+          "in" : "query",
+          "description" : "station's site name, e.g. <b>Lagos</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "spprms",
+          "in" : "query",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "state",
+          "in" : "query",
+          "description" : "station's state e.g. <b>Lisbon</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "statusfile",
+          "in" : "query",
+          "description" : "T2 status file e.g. <b>-3</b> or <b>2</b> or <b>1</b> or <b>0</b> or <b>1</b> or <b>2</b> or <b>3</b>",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/coordinates/{area}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY COORDINATES V2</b> - Returns the station(s) that are inside the specified perimeter.\n\n<p>\nPlease specify the output output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the ouput format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\nPlease specify the bounding box type as one of the formats below:\n<ul>\n    <li>Circle</li>\n    <li>Polygon</li>\n    <li>Rectangle</li>\n</ul>\n</p>\n\n<p>\n    <b>Circle parameters:</b>\n    <ul>\n        <li>centerLat - latitude of the center point</li>\n        <li>centerLon - longitude of the center point</li>\n        <li>radius - radius of the circle, in km</li>\n    </ul>\n</p>\n\n<p>\n    <b>Polygon parameters:</b>\n    <ul>\n         <li>latitude,longitude;latitude,longitude;..</li>\n    </ul>\n\nThe polygon vertices follow the order specified in this image: <a href=\"../../../images/coordinates_polygon_order.jpg\" target=\"_blank\">Polygon Order</a>\n</p>\n\n<p>\n    <b>Rectangle parameters:</b>\n    <ul>\n        <li>maxLat - maximum latitude of the rectangle</li>\n        <li>maxLon - maximum longitude of the rectangle</li>\n        <li>minLat - minimum latitude of the rectangle</li>\n        <li>minLon - minimum longitude of the rectangle</li>\n    </ul>\n</p>\n\n<p>The parameters must be separated by <b>&</b>(AMPERSAND)</p>\n<p>\n    <b>Side note:</b> by default, parameters are filled with -999. If this value is changed, is assumed you want to use it;\n</p>",
+        "parameters" : [ {
+          "name" : "area",
+          "in" : "path",
+          "description" : "format of the perimeter, e.g. circle",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "centerlat",
+          "in" : "query",
+          "description" : "- for circle only e.g. 43.034",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "centerlon",
+          "in" : "query",
+          "description" : "- for circle only e.g. 7.013",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxlat",
+          "in" : "query",
+          "description" : "- for rectangle only e.g. 47.0",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxlon",
+          "in" : "query",
+          "description" : "- for rectangle only e.g. 8.8",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minlat",
+          "in" : "query",
+          "description" : "- for rectangle only e.g. 43.0",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minlon",
+          "in" : "query",
+          "description" : "- for rectangle only e.g. 6.5",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "polygon",
+          "in" : "query",
+          "description" : "- for polygon only e.g. 42.0,7.0;32.1,7.4;37,4.6",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "radius",
+          "in" : "query",
+          "description" : "- for circle only e.g. 50 (km)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/country/{country}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY COUNTRY V2</b> - Returns the station(s) from the specified country(ies).\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for country should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "country",
+          "in" : "path",
+          "description" : "country(ies) name(s) e.g. Portugal",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/date/{date_from}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY DATE V2</b> - Returns the station(s) that were active at some point since the initial date (and optionally until the end date).\n\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    The date(s) should be in the format <b>YYYYMMDD</b> or <b>YYYY-MM-DD</b>.\n</p>",
+        "parameters" : [ {
+          "name" : "date_from",
+          "in" : "path",
+          "description" : "Initial date",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "date_to",
+          "in" : "query",
+          "description" : "End date",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/list/station" : {
+      "get" : {
+        "description" : "<b>GET STATION LIST V2</b> - Returns a list with the name and marker of all the stations or the ones that match the given parameters.\n<p>\nOptional parameters are:\n<ul>\n<li>name</li>\n<li>marker</li>\n</ul>\n<p>\nThis can be passed as:\n<b>name=Blieux</b> or <b>marker=BLIX,CASC</b>\n</p>\n<p>\nDifferent parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n<p>\n    Multiple values for a parameter should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "marker",
+          "in" : "query",
+          "description" : "Marker of the station(s)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "Name of the station(s)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/list/{data}" : {
+      "get" : {
+        "description" : "<b>GET LIST V2</b> - Returns a list containing existing data of the chosen type of data.\n<p>\nChoose the type of data you want to obtain from the list below:\n</p>\n<ul>\n    <li>agency</li>\n    <li>antenna</li>\n    <li>city</li>\n    <li>country</li>\n    <li>files_type</li>\n    <li>network</li>\n    <li>radome</li>\n    <li>receiver</li>\n    <li>state</li>\n    <li>station</li>\n</ul>",
+        "parameters" : [ {
+          "name" : "data",
+          "in" : "path",
+          "description" : "Type of data to be listed.",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Station"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/marker/{marker}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY MARKER V2</b> - Returns the station(s) that match the given marker(s) in the expected format.\n\n\n<p>\nPlease input the size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease input the format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for marker should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "marker",
+          "in" : "path",
+          "description" : "Marker of the station(s)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/name/{name}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY NAME V2</b> - Returns the station(s) that match the given name(s) in the expected format.\n\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for name should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "name",
+          "in" : "path",
+          "description" : "Name of the station(s)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/network/{network}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY NETWORK V2</b> - Returns the station(s) that belong to the specified network(s).\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for network should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "network",
+          "in" : "path",
+          "description" : "network(s) to which the stations belong",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/radome/{radome}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY RADOME V2</b> - Returns the station(s) that have the specified radome.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for radome should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "radome",
+          "in" : "path",
+          "description" : "radome(s) name(s) e.g. OLGA",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/receiver/{receiver}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY RECEIVER V2</b> - Returns the station(s) that have the specified receiver.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for receiver should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "receiver",
+          "in" : "path",
+          "description" : "receiver(s) name(s) e.g. ASHTECH GG24C",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/state/{state}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY STATE V2</b> - Returns the station(s) from the specified state(s).\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (valid only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    Multiple values for state should be separated by <b>,</b> (COMMA)\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "state",
+          "in" : "path",
+          "description" : "state(s) name(s) e.g. Lisbon",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/station/bbox/{minLon}/{minLat}/{maxLon}/{maxLat}" : {
+      "get" : {
+        "description" : "<b>GET STATION BOUNDING BOX </b> - Returns all the stations that are inside the bounding box in multiple outputs<br>\nPlease specify the output format as one of the options below in the request header<br>\n<ul>\n<li>APPLICATION/GEO+JSON - GeoJSON output </li>\n<li>APPLICATION/JSON  - plain json output </li>\n<li>APPLICATION/CSV or APPLICATION_OCTET_STREAM - csv output </li>\n</ul>\nBy default, if no output format is sepcified, the output is <b>geojson</b><br>\nThe order of the bounding box is left, bottom, right, top <br>\nwhich means minimum Longitude, minimum Latitude, maximum Longitude, maximum Latitude<br>",
+        "parameters" : [ {
+          "name" : "minLon",
+          "in" : "path",
+          "description" : "[-180, 180]",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "minLat",
+          "in" : "path",
+          "description" : "[-90, 90]",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxLon",
+          "in" : "path",
+          "description" : "[-180, 180]",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        }, {
+          "name" : "maxLat",
+          "in" : "path",
+          "description" : "[-90, 90]",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "number"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/geo+json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content",
+            "content" : {
+              "application/geo+json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/geo+json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/station/geojson/{output_format}/{geoJSON}" : {
+      "get" : {
+        "description" : "<b>GET STATION GEOJSON</b> - Returns all the stations that are inside the geometry of geoJSON input\n\n<p>\n    Input can be created using http://geojson.io\n</p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>geojson</li>\n<li>json</li>\n</ul>\n</p>",
+        "parameters" : [ {
+          "name" : "geoJSON",
+          "in" : "path",
+          "description" : "geoJSON with geometry",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "output_format",
+          "in" : "path",
+          "description" : "output format of the request",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/station/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION V2</b> - Returns all the station in the expected format.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>geojson (only for short size)</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/v2/type/{station_type}/{size}/{format}" : {
+      "get" : {
+        "description" : "<b>GET STATION BY STATION TYPE V2</b> - Returns the station(s) that belong to the specified station type.\n\n<p>\nPlease specify the output size as one of the options below:\n<ul>\n<li>full</li>\n<li>short</li>\n</ul>\n<p>\n\n<p>\nPlease specify the output format as one of the options below:\n<ul>\n<li>csv</li>\n<li>json</li>\n<li>xml (only for full size)</li>\n\n</ul>\n</p>\n\n<p>\n    The station type should be (exactly):\n    <ul>\n        <li><b>GPS/GNSS Continuous</b></li>\n        <li><b>GNSS</b></li>\n        <li><b>GNSS Continuous</b></li>\n    </ul>\n</p>",
+        "parameters" : [ {
+          "name" : "format",
+          "in" : "path",
+          "description" : "output file format",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "size",
+          "in" : "path",
+          "description" : "short or full data (full is slower)",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "station_type",
+          "in" : "path",
+          "description" : "type of the stations",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/octet-stream;charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/build" : {
+      "get" : {
+        "description" : "<b>GET GLASS Last Build Info</b> - Returns current build info of GLASS-API.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tools/timeseries" : {
+      "get" : {
+        "description" : "<b>Creates auxiliary files with pre-prepared timeseries to improve response time</b> - Returns status of job.",
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      }
+    },
+    "/tools/version" : {
+      "get" : {
+        "description" : "<b>GET GLASS VERSION</b> - Returns current version of GLASS-API.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Agency" : {
+        "properties" : {
+          "abbreviation" : {
+            "type" : "string"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "infos" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "www" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Analysis_Centers" : {
+        "properties" : {
+          "abbreviation" : {
+            "type" : "string"
+          },
+          "contact" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Bedrock" : {
+        "properties" : {
+          "condition" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "City" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "state" : {
+            "$ref" : "#/components/schemas/State"
+          }
+        }
+      },
+      "Colocation_offset" : {
+        "properties" : {
+          "date_measured" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "offset_x" : {
+            "type" : "number"
+          },
+          "offset_y" : {
+            "type" : "number"
+          },
+          "offset_z" : {
+            "type" : "number"
+          },
+          "station_colocation" : {
+            "$ref" : "#/components/schemas/Station_colocation"
+          }
+        }
+      },
+      "Condition" : {
+        "properties" : {
+          "comments" : {
+            "type" : "string"
+          },
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          },
+          "degradation" : {
+            "type" : "string"
+          },
+          "effect" : {
+            "$ref" : "#/components/schemas/Effects"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Contact" : {
+        "properties" : {
+          "agency" : {
+            "$ref" : "#/components/schemas/Agency"
+          },
+          "comment" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "gsm" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Coordinates" : {
+        "properties" : {
+          "altitude" : {
+            "type" : "number"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "lat" : {
+            "type" : "number"
+          },
+          "lon" : {
+            "type" : "number"
+          },
+          "x" : {
+            "type" : "number"
+          },
+          "y" : {
+            "type" : "number"
+          },
+          "z" : {
+            "type" : "number"
+          }
+        }
+      },
+      "Country" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "iso_code" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DataBaseT4Connection" : {
+        "properties" : {
+          "x" : {
+            "type" : "object"
+          },
+          "y" : {
+            "type" : "object"
+          }
+        }
+      },
+      "Document" : {
+        "properties" : {
+          "date" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "document_type" : {
+            "$ref" : "#/components/schemas/Document_type"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "item" : {
+            "$ref" : "#/components/schemas/Item"
+          },
+          "link" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Document_type" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Effects" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "File_generated" : {
+        "properties" : {
+          "file_type" : {
+            "$ref" : "#/components/schemas/File_type"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "station_marker" : {
+            "type" : "string"
+          }
+        }
+      },
+      "File_type" : {
+        "properties" : {
+          "format" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "sampling_frequency" : {
+            "type" : "string"
+          },
+          "sampling_window" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Geological" : {
+        "properties" : {
+          "bedrock" : {
+            "$ref" : "#/components/schemas/Bedrock"
+          },
+          "characteristic" : {
+            "type" : "string"
+          },
+          "distance_to_fault" : {
+            "type" : "string"
+          },
+          "fault_zone" : {
+            "type" : "string"
+          },
+          "fracture_spacing" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Instrument_collocation" : {
+        "properties" : {
+          "comment" : {
+            "type" : "string"
+          },
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Item" : {
+        "properties" : {
+          "comment" : {
+            "type" : "string"
+          },
+          "contact_as_owner" : {
+            "$ref" : "#/components/schemas/Contact"
+          },
+          "contact_as_producer" : {
+            "$ref" : "#/components/schemas/Contact"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "item_type" : {
+            "$ref" : "#/components/schemas/Item_type"
+          }
+        }
+      },
+      "Item_type" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Local_ties" : {
+        "properties" : {
+          "accuracy" : {
+            "type" : "number"
+          },
+          "comment" : {
+            "type" : "string"
+          },
+          "cpd_num" : {
+            "type" : "string"
+          },
+          "date_at" : {
+            "type" : "string"
+          },
+          "dx" : {
+            "type" : "number"
+          },
+          "dy" : {
+            "type" : "number"
+          },
+          "dz" : {
+            "type" : "number"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "iers_domes" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "survey_method" : {
+            "type" : "string"
+          },
+          "usage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Location" : {
+        "properties" : {
+          "city" : {
+            "$ref" : "#/components/schemas/City"
+          },
+          "coordinates" : {
+            "$ref" : "#/components/schemas/Coordinates"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "tectonic" : {
+            "$ref" : "#/components/schemas/Tectonic"
+          }
+        }
+      },
+      "Log" : {
+        "properties" : {
+          "contact" : {
+            "$ref" : "#/components/schemas/Contact"
+          },
+          "date" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "log_type" : {
+            "$ref" : "#/components/schemas/Log_type"
+          },
+          "modified" : {
+            "type" : "string"
+          },
+          "previous" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Log_type" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Monument" : {
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "foundation" : {
+            "type" : "string"
+          },
+          "foundation_depth" : {
+            "type" : "string"
+          },
+          "height" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "inscription" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Network" : {
+        "properties" : {
+          "contact" : {
+            "$ref" : "#/components/schemas/Contact"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "State" : {
+        "properties" : {
+          "country" : {
+            "$ref" : "#/components/schemas/Country"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Station" : {
+        "properties" : {
+          "angle" : {
+            "type" : "number"
+          },
+          "collocationInstrument" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Instrument_collocation"
+            }
+          },
+          "comment" : {
+            "type" : "string"
+          },
+          "condition" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Condition"
+            }
+          },
+          "country_code" : {
+            "type" : "string"
+          },
+          "cpd_num" : {
+            "type" : "string"
+          },
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "document" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Document"
+            }
+          },
+          "filesGenerated" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/File_generated"
+            }
+          },
+          "geological" : {
+            "$ref" : "#/components/schemas/Geological"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "iers_domes" : {
+            "type" : "string"
+          },
+          "localTies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Local_ties"
+            }
+          },
+          "location" : {
+            "$ref" : "#/components/schemas/Location"
+          },
+          "logs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Log"
+            }
+          },
+          "marker" : {
+            "type" : "string"
+          },
+          "markerLongName" : {
+            "type" : "string"
+          },
+          "monument" : {
+            "$ref" : "#/components/schemas/Monument"
+          },
+          "monument_num" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "pA_coordinates" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Analysis_Centers"
+            }
+          },
+          "pA_timeseries" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Analysis_Centers"
+            }
+          },
+          "pA_velocities" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Analysis_Centers"
+            }
+          },
+          "power_spectral_density" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Analysis_Centers"
+            }
+          },
+          "receiver_num" : {
+            "type" : "integer"
+          },
+          "rinexFiles" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "startAndEndEpochs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/DataBaseT4Connection"
+            }
+          },
+          "stationColocationOffsets" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Colocation_offset"
+            }
+          },
+          "stationContacts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Station_contact"
+            }
+          },
+          "stationItems" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Station_item"
+            }
+          },
+          "stationNetworks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Station_network"
+            }
+          },
+          "station_type" : {
+            "$ref" : "#/components/schemas/Station_type"
+          },
+          "userGroupStation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/User_group_station"
+            }
+          },
+          "vectorLength" : {
+            "type" : "number"
+          }
+        }
+      },
+      "Station_colocation" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "idStation" : {
+            "type" : "integer"
+          },
+          "station_colocated" : {
+            "$ref" : "#/components/schemas/Station"
+          }
+        }
+      },
+      "Station_contact" : {
+        "properties" : {
+          "contact" : {
+            "$ref" : "#/components/schemas/Contact"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "role" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Station_item" : {
+        "properties" : {
+          "date_from" : {
+            "type" : "string"
+          },
+          "date_to" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "item" : {
+            "$ref" : "#/components/schemas/Item"
+          }
+        }
+      },
+      "Station_network" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "id_station" : {
+            "type" : "integer"
+          },
+          "network" : {
+            "$ref" : "#/components/schemas/Network"
+          }
+        }
+      },
+      "Station_type" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Tectonic" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "plate_name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User_group" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User_group_station" : {
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "id_stations" : {
+            "type" : "integer"
+          },
+          "user_groups" : {
+            "$ref" : "#/components/schemas/User_group"
+          }
+        }
+      },
+      "body" : {
+        "required" : [ "data" ],
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "string",
+            "description" : "JSON string with the parameters needed to process the customized download request."
+          }
+        }
+      }
+    }
+  }
+}
