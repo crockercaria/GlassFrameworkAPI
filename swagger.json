@@ -10,7 +10,7 @@
   "paths" : {
     "/files/{object_type}/{object_instance}/{output_format}" : {
       "get" : {
-        "description" : "<b>GET FILES V2</b> - Returns the files(s) that match the criteria.\n\n<p>\n<b>object_type - </b> the type of the criteria\n<ul>\n    <li>agency</li>\n    <li>antenna</li>\n    <li>city</li>\n    <li>combination</li>\n    <li>coordinates<b>º</b></li>\n    <li>coordinates_data</li>\n    <li>coordinates_data_list</li>\n    <li>country</li>\n    <li>date_range<b>ºº</b></li>\n    <li>file_name</li>\n    <li>format</li>\n    <li>length</li>\n    <li>marker (station)</li>\n    <li>md5</li>\n    <li>name (station)</li>\n    <li>network</li>\n    <li>published_date<b>ºº</b></li>\n    <li>radome</li>\n    <li>receiver</li>\n    <li>sampling_frequency</li>\n    <li>state</li>\n    <li>station_date<b>ºº</b></li>\n    <li>type</li>\n</ul>\n\n<b>º</b> - this object uses \"minLat=X&maxLat=X&minLon=X&maxLon=X\" as it's object instance.\n<b>ºº</b> - this objects use \"date_from=X&date_to=X\" as it's object instance.\n</p>\n\n<p>\n<b>object_instance - </b> the value of the criteria <i>(e.g. for country criteria may be France)</i>\n</p>\n\n\n<p>\n<b>output_format - </b> the format of the output\n<ul>\n    <li>csv</li>\n    <li>json</li>\n    <li>script<b>ª</b></li>\n    <li>xml</li>\n</ul>\n\n<b>ª</b> - this format is not valid for all object_type\n</p>",
+        "description" : "<b>GET FILES V2</b> - Returns the files(s) that match the criteria.\n\n<p>\n<b>object_type - </b> the type of the criteria\n<ul>\n    <li>agency</li>\n    <li>antenna</li>\n    <li>city</li>\n    <li>combination</li>\n    <li>coordinates<b>º</b></li>\n    <li>coordinates_data</li>\n    <li>coordinates_data_list</li>\n    <li>country</li>\n    <li>date_range<b>ºº</b></li>\n    <li>file_name (can be used with '?md5=xxx' as checksum)</li>\n    <li>format</li>\n    <li>length</li>\n    <li>marker (station)</li>\n    <li>md5</li>\n    <li>name (station)</li>\n    <li>network</li>\n    <li>published_date<b>ºº</b></li>\n    <li>radome</li>\n    <li>receiver</li>\n    <li>sampling_frequency</li>\n    <li>state</li>\n    <li>station_date<b>ºº</b></li>\n    <li>type</li>\n</ul>\n\n<b>º</b> - this object uses \"minLat=X&maxLat=X&minLon=X&maxLon=X\" as it's object instance.\n<b>ºº</b> - this objects use \"date_from=X&date_to=X\" as it's object instance.\n</p>\n\n<p>\n<b>object_instance - </b> the value of the criteria <i>(e.g. for country criteria may be France)</i>\n</p>\n\n\n<p>\n<b>output_format - </b> the format of the output\n<ul>\n    <li>csv</li>\n    <li>json</li>\n    <li>script<b>ª</b></li>\n    <li>xml</li>\n</ul>\n\n<b>ª</b> - this format is not valid for all object_type\n</p>",
         "parameters" : [ {
           "name" : "object_instance",
           "in" : "path",
@@ -2788,8 +2788,18 @@
     },
     "/stations/v2/list/station" : {
       "get" : {
-        "description" : "<b>GET STATION LIST V2</b> - Returns a list with the name and marker of all the stations or the ones that match the given parameters.\n<p>\nOptional parameters are:\n<ul>\n<li>name</li>\n<li>marker</li>\n</ul>\n<p>\nThis can be passed as:\n<b>name=Blieux</b> or <b>marker=BLIX,CASC</b>\n</p>\n<p>\nDifferent parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n<p>\n    Multiple values for a parameter should be separated by <b>,</b> (COMMA)\n</p>",
+        "description" : "<b>GET STATION LIST V2</b> - Returns a list with the name and marker of all the stations or the ones that match the given parameters.\n<p>\nOptional parameters are:\n<ul>\n<li>epos</li>\n<li>name</li>\n<li>marker</li>\n</ul>\n<p>\nThis can be passed as:\n<b>name=Blieux</b> or <b>marker=BLIX,CASC</b> or <b>epos=Non-epos</b>\n</p>\n<p>\nDifferent parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n<p>\n    Multiple values for a parameter should be separated by <b>,</b> (COMMA)\n</p>",
         "parameters" : [ {
+          "name" : "epos",
+          "in" : "query",
+          "description" : "epos or non-epos",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "marker",
           "in" : "query",
           "description" : "Marker of the station(s)",
