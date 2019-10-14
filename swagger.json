@@ -3348,7 +3348,7 @@
     },
     "/stations/v2/station/bbox/{minLon}/{minLat}/{maxLon}/{maxLat}" : {
       "get" : {
-        "description" : "<b>GET STATION BOUNDING BOX </b> - Returns all the stations that are inside the bounding box in multiple outputs<br>\nPlease specify the output format as one of the options below in the request header<br>\n<ul>\n<li>APPLICATION/GEO+JSON - GeoJSON output </li>\n<li>APPLICATION/JSON  - plain json output </li>\n<li>APPLICATION/CSV or APPLICATION_OCTET_STREAM - csv output </li>\n</ul>\nBy default, if no output format is sepcified, the output is <b>geojson</b><br>\nThe order of the bounding box is left, bottom, right, top <br>\nwhich means minimum Longitude, minimum Latitude, maximum Longitude, maximum Latitude<br>",
+        "description" : "<b>GET STATION BOUNDING BOX </b> - Returns all the stations that are inside the bounding box in multiple outputs<br>\nPlease specify the output format as one of the options below in the request header<br>\n<ul>\n<li>APPLICATION/GEO+JSON - GeoJSON output </li>\n<li>APPLICATION/JSON  - plain json output </li>\n<li>APPLICATION/CSV or APPLICATION_OCTET_STREAM - csv output </li>\n</ul>\nBy default, if no output format is sepcified, the output is <b>geojson</b><br>\nThe order of the bounding box is left, bottom, right, top <br>\nwhich means minimum Longitude, minimum Latitude, maximum Longitude, maximum Latitude<br>\n<br>This API queries the table 'coordinates' to find the position of the stations.</br>",
         "parameters" : [ {
           "name" : "minLon",
           "in" : "path",
