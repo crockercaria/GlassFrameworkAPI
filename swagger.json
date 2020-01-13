@@ -2788,7 +2788,7 @@
     },
     "/stations/v2/list/station" : {
       "get" : {
-        "description" : "<b>GET STATION LIST V2</b> - Returns a list with the name and marker of all the stations or the ones that match the given parameters.\n<p>\nOptional parameters are:\n<ul>\n<li>epos</li>\n<li>name</li>\n<li>marker</li>\n</ul>\n<p>\nThis can be passed as:\n<b>name=Blieux</b> or <b>marker=BLIX,CASC</b> or <b>epos=Non-epos</b>\n</p>\n<p>\nDifferent parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n<p>\n    Multiple values for a parameter should be separated by <b>,</b> (COMMA)\n</p>",
+        "description" : "<b>GET STATION LIST V2</b> - Returns a list with the name and marker of all the stations or the ones that match the given parameters.\n<p>\nOptional parameters are:\n<ul>\n<li>epos</li>\n<li>name</li>\n<li>marker</li>\n<li>markerlongname</li>\n</ul>\n<p>\nThis can be passed as:\n<b>name=Blieux</b> or <b>marker=BLIX,CASC</b> or <b>epos=Non-epos</b>\n</p>\n<p>\nDifferent parameters should be separated by <b>&</b> (AMPERSAND)\n</p>\n<p>\n    Multiple values for a parameter should be separated by <b>,</b> (COMMA)\n</p>",
         "parameters" : [ {
           "name" : "epos",
           "in" : "query",
@@ -2803,6 +2803,16 @@
           "name" : "marker",
           "in" : "query",
           "description" : "Marker of the station(s)",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "markerlongname",
+          "in" : "query",
+          "description" : "Markerlongname of the station(s)",
           "required" : false,
           "style" : "form",
           "explode" : true,
